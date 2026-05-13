@@ -42,7 +42,7 @@ router.get('/', function (req, res, next) {
       });
       
     } catch (error) {
-        console.error("Erreur /trips :", error);
+        console.error("Erreur /trips :", err);
 
         return res.status(500).json({
           result: false,
@@ -83,7 +83,7 @@ router.post("/sel", async (req, res) => {
       res.json({ result: true });
       }
   catch (err) {
-        console.error(error);
+        console.error(err);
         res.status(500).json({ result: false, error: "CREAT Database error", });        
   }
 }); 
