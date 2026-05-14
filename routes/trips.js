@@ -52,7 +52,7 @@ router.get('/', function (req, res, next) {
 });
 
 // Ajout d'un trajet dans le panier /
-router.post("/sel", async (req, res) => {
+router.post("/selectrip", async (req, res) => {
   try {
       // Vérification des champs obligatoires
       const { depart, arrivee, jour, prix } = req.body;

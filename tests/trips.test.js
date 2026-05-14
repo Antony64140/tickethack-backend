@@ -56,7 +56,7 @@ describe("GET /trips", () => {
   });
 });
 
-describe("POST /trips/sel", () => {
+describe("POST /trips/selectrip", () => {
 
   test("Doit créer un trajet", async () => {
 
