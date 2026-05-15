@@ -88,6 +88,28 @@ router.post("/selectrip", async (req, res) => {
   }
 }); 
 
+router.get('/panier', async function (req, res, next) {
+    try { const TripPanier = await trip.find({etat: 0});
+          console.log(TripPanier);
+          
+          return res.status(200).json({ result: true, trips: TripPanier });
+        }
+    catch (err) {
+        console.error(err);
+        res.status(500).json({ result: false, error: "RECUP PANIER Database error", });     
+        }
+});
+
+router.get('/book', async function (req, res, next) {
+    try { const TripPanier = await trip.find({etat: 1});
+          return res.status(200).json({ result: true, trips: TripPanier });
+        }
+    catch (err) {
+        console.error(err);
+        res.status(500).json({ result: false, error: "RECUP BOOK Database error", });     
+        }
+});
+
 
 
 module.exports = router;
