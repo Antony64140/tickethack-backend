@@ -129,3 +129,5 @@ router.delete('/suppr/:id', async (req, res) => {
     });
   }
 });
+
+module.exports = router;
