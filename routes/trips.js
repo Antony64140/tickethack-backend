@@ -129,35 +129,3 @@ router.delete('/suppr/:id', async (req, res) => {
     });
   }
 });
-router.put('/buy', async (req, res) => {
-  try {
-    console.log(req.body);
-
-    let tripIds = req.body._id;
-
-    console.log(tripIds);
-
-    tripIds = tripIds.map((id) => id.replace('undefined', ''));
-
-    console.log(tripIds);
-
-    const updateResult = await trip.updateMany(
-      { _id: { $in: tripIds } },
-      { etat: 1 }
-    );
-
-    console.log(updateResult);
-
-    res.json({
-      result: true,
-    });
-  } catch (error) {
-    console.error(error);
-
-    res.status(500).json({
-      result: false,
-      error: 'Update error',
-    });
-  }
-});
-module.exports = router;
