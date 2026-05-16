@@ -129,5 +129,38 @@ router.delete('/suppr/:id', async (req, res) => {
     });
   }
 });
+router.put('/buy', async (req, res) => {
+  try {
+    let tripIds = req.body._id;
 
+    console.log('AVANT NETTOYAGE :', tripIds);
+
+    // Nettoyage des ids envoyés par le frontend
+    tripIds = tripIds.map((id) => id.replace('undefined', ''));
+
+    console.log('APRES NETTOYAGE :', tripIds);
+
+    const updateResult = await trip.updateMany(
+      {
+        _id: { $in: tripIds },
+      },
+      {
+        etat: 1,
+      }
+    );
+
+    console.log(updateResult);
+
+    res.json({
+      result: true,
+    });
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      result: false,
+      error: 'Update error',
+    });
+  }
+});
 module.exports = router;
