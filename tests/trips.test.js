@@ -61,7 +61,7 @@ describe("POST /trips/selectrip", () => {
   test("Doit créer un trajet", async () => {
 
     const response = await request(app)
-      .post("/trips/sel")
+      .post("/trips/selectrip")
       .send({
         depart: "Paris",
         arrivee: "Marseille",
@@ -85,7 +85,7 @@ describe("POST /trips/selectrip", () => {
   test("Doit refuser un trajet incomplet", async () => {
 
     const response = await request(app)
-        .post("/trips/sel")
+        .post("/trips/selectrip")
         .send({
         depart: "Paris",
         });
@@ -107,7 +107,7 @@ describe("POST /trips/selectrip", () => {
     });
 
     const response = await request(app)
-        .post("/trips/sel")
+        .post("/trips/selectrip")
         .send({
         depart: "Paris",
         arrivee: "Lyon",
@@ -120,5 +120,35 @@ describe("POST /trips/selectrip", () => {
     expect(response.body.error).toBe(
         "Ce trajet existe déjà"
     );
+  });
+});
+
+describe("GET /trips/panier", () => {
+
+  test("Doit retourner les trajets sélectionner dans le panier", async () => {
+
+    const response = await request(app)
+      .get("/trips/panier");
+
+    expect(response.statusCode).toBe(200);
+
+    expect(response.body.result).toBe(true);
+
+    expect(Array.isArray(response.body.trips)).toBe(true);
+  });
+});
+
+describe("GET /trips/book", () => {
+
+  test("Doit retourner les trajets acheter dans le book", async () => {
+
+    const response = await request(app)
+      .get("/trips/book");
+
+    expect(response.statusCode).toBe(200);
+
+    expect(response.body.result).toBe(true);
+
+    expect(Array.isArray(response.body.trips)).toBe(true);
   });
 });
